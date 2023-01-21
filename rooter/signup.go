@@ -1,6 +1,9 @@
 package rooter
 
 import (
+	"fmt"
+	"github.com/shokishimo/OneTap/db"
+	"github.com/shokishimo/OneTap/model"
 	"html/template"
 	"net/http"
 )
@@ -27,5 +30,19 @@ func signUpGet(w http.ResponseWriter) {
 }
 
 func signUpPost(w http.ResponseWriter, r *http.Request) {
+	user := model.User{
+		Username: r.FormValue("username"),
+		Password: r.FormValue("password"),
+	}
+
+	client, err := db.Connect()
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+	}
+
+	db.Disconnect(client)
+
+	// For debugging
+	fmt.Fprintf(w, "Username: %s, Password: %s", user.Username, user.Password)
 
 }
