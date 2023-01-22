@@ -34,12 +34,13 @@ func signUpGet(w http.ResponseWriter) {
 func signUpPost(w http.ResponseWriter, r *http.Request) {
 	sessionID := user.GenerateSessionID()
 	theUser := user.User{
-		Username: r.FormValue("username"),
-		Password: user.Hash(r.FormValue("password")),
-		//SessionID: user.Hash(sessionID),
-		SessionID: sessionID,
+		Username:  r.FormValue("username"),
+		Password:  user.Hash(r.FormValue("password")),
+		SessionID: user.Hash(sessionID),
 	}
 	// TODO: validate the user input
+
+	// TODO: check if the input user already exists in the database
 
 	// save the user
 	err := user.SaveUser(theUser)

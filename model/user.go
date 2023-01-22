@@ -3,11 +3,11 @@ package model
 import (
 	"context"
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/hex"
 	"errors"
 	"github.com/joho/godotenv"
 	"github.com/shokishimo/OneTap/db"
-	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
 	"time"
@@ -66,18 +66,11 @@ func GenerateSessionID() string {
 
 // Hash hashes the input and return the hashed value
 func Hash(val string) string {
-	// Generate the hash with a cost of 12
-	hashed, _ := bcrypt.GenerateFromPassword([]byte(val), 12)
-	return string(hashed)
-}
-
-// CompareHash compare hashed value and plain text and return true if these two values are the same. Return false otherwise.
-func CompareHash(hashed string, plain string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hashed), []byte(plain))
-	if err != nil {
-		return false
-	}
-	return true
+	// Hash the password
+	hash := sha256.Sum256([]byte(val))
+	// Encode the hash as a hexadecimal string
+	hashed := hex.EncodeToString(hash[:])
+	return hashed
 }
 
 // SetCookie sets a cookie

@@ -26,6 +26,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// obtain sessionID inside the cookie
 	sessionID := cookie.Value
+	fmt.Println(sessionID)
 
 	// check if the sessionID exists, if so,
 	theUser, result := doesSessionIDExist(sessionID)
@@ -56,7 +57,8 @@ func ShowPublicHome(w http.ResponseWriter) {
 // isSessionIDValid checks if the sessionID exists. It returns user.User and true if the user with the sessionID exists
 func doesSessionIDExist(sid string) (user.User, bool) {
 	// Hash the sid
-	// hashed := user.Hash(sid)
+	hashed := user.Hash(sid)
+	fmt.Println(hashed + " in doesSessionIDExist")
 	// get access keys
 	database, userCollection, err := user.GetDatabaseAccessKeys()
 	if err != nil {
@@ -76,7 +78,7 @@ func doesSessionIDExist(sid string) (user.User, bool) {
 	// bson.M creates a map, bson.A creates an array
 	var result bson.M
 	// Define the filter to find a specific document
-	filter := bson.M{"sessionid": sid}
+	filter := bson.M{"sessionid": hashed}
 	// check if the sessionID exists in the database
 	err = collection.FindOne(context.TODO(), filter).Decode(&result)
 	// when the user with the sessionID not found
