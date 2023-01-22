@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"os"
 
@@ -26,7 +25,7 @@ func Connect() (*mongo.Client, error) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Success in connecting to MongoDB")
+	// fmt.Println("Success in connecting to MongoDB")
 	return client, nil
 }
 
@@ -34,5 +33,5 @@ func Disconnect(client *mongo.Client) {
 	if err := client.Disconnect(context.TODO()); err != nil {
 		panic(err)
 	}
-	fmt.Println("Disconnected from MongoDB")
+	// fmt.Println("Disconnected from MongoDB")
 }

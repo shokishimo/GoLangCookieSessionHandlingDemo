@@ -26,13 +26,12 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	// obtain sessionID inside the cookie
 	sessionID := cookie.Value
-	fmt.Println(sessionID)
 
 	// check if the sessionID exists, if so,
 	theUser, result := doesSessionIDExist(sessionID)
-	fmt.Println(result)
 	// for those who did signup
 	if result {
+		// TODO: create the accountHome
 		fmt.Fprintln(w, "Username: "+theUser.Username+
 			", password: "+theUser.Password+
 			", sessionID: "+theUser.SessionID)
@@ -58,7 +57,6 @@ func ShowPublicHome(w http.ResponseWriter) {
 func doesSessionIDExist(sid string) (user.User, bool) {
 	// Hash the sid
 	hashed := user.Hash(sid)
-	fmt.Println(hashed + " in doesSessionIDExist")
 	// get access keys
 	database, userCollection, err := user.GetDatabaseAccessKeys()
 	if err != nil {
