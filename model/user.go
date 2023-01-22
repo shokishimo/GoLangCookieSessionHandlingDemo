@@ -2,10 +2,15 @@ package model
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"github.com/joho/godotenv"
 	"github.com/shokishimo/OneTap/db"
+	"golang.org/x/crypto/bcrypt"
+	"net/http"
 	"os"
+	"time"
 )
 
 type User struct {
@@ -16,16 +21,17 @@ type User struct {
 
 func SaveUser(user User) error {
 	// get access keys
-	database, userCollection, err := getDatabaseAccessKeys()
+	database, userCollection, err := GetDatabaseAccessKeys()
 	if err != nil {
 		return err
 	}
-
 	// connect to database
 	client, err := db.Connect()
 	if err != nil {
 		return err
 	}
+	// Disconnect from db
+	defer db.Disconnect(client)
 
 	// begin insert user
 	collection := client.Database(database).Collection(userCollection)
@@ -34,13 +40,11 @@ func SaveUser(user User) error {
 		return err
 	}
 
-	// Disconnect from db
-	defer db.Disconnect(client)
 	return nil
 }
 
-// getDatabaseAccessKeys gets keys to access database from .env file
-func getDatabaseAccessKeys() (database string, userCollection string, err error) {
+// GetDatabaseAccessKeys gets keys to access database from .env file
+func GetDatabaseAccessKeys() (database string, userCollection string, err error) {
 	if err := godotenv.Load(); err != nil {
 		return "", "", err
 	}
@@ -50,4 +54,41 @@ func getDatabaseAccessKeys() (database string, userCollection string, err error)
 		return "", "", errors.New("database access key strings are wrong")
 	}
 	return database, userCollection, nil
+}
+
+// GenerateSessionID Generates a sessionID
+func GenerateSessionID() string {
+	b := make([]byte, 16)
+	rand.Read(b)
+	sessionID := hex.EncodeToString(b)
+	return sessionID
+}
+
+// Hash hashes the input and return the hashed value
+func Hash(val string) string {
+	// Generate the hash with a cost of 12
+	hashed, _ := bcrypt.GenerateFromPassword([]byte(val), 12)
+	return string(hashed)
+}
+
+// CompareHash compare hashed value and plain text and return true if these two values are the same. Return false otherwise.
+func CompareHash(hashed string, plain string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hashed), []byte(plain))
+	if err != nil {
+		return false
+	}
+	return true
+}
+
+// SetCookie sets a cookie
+func SetCookie(w http.ResponseWriter, sid string) {
+	cookie := http.Cookie{
+		Name:     "sessionID",
+		Value:    sid,
+		Expires:  time.Now().Add(300 * 1 * time.Second),
+		HttpOnly: true,
+		Secure:   false,                // TODO: change this to true when deploying
+		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
+	}
+	http.SetCookie(w, &cookie)
 }

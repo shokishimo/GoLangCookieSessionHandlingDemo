@@ -2,7 +2,7 @@ package rooter
 
 import (
 	"fmt"
-	"github.com/shokishimo/OneTap/model"
+	user "github.com/shokishimo/OneTap/model"
 	"html/template"
 	"net/http"
 )
@@ -32,26 +32,25 @@ func signUpGet(w http.ResponseWriter) {
 
 // signUpPost save a user signed up
 func signUpPost(w http.ResponseWriter, r *http.Request) {
-	user := model.User{
-		Username: r.FormValue("username"),
-		Password: r.FormValue("password"),
+	sessionID := user.GenerateSessionID()
+	theUser := user.User{
+		Username:  r.FormValue("username"),
+		Password:  user.Hash(r.FormValue("password")),
+		SessionID: user.Hash(sessionID),
 	}
-
-	// TODO: Add validations to input username and password
-
-	// TODO: Hash the password
+	// TODO: validate the user input
 
 	// save the user
-	err := model.SaveUser(user)
+	err := user.SaveUser(theUser)
 	if err != nil {
 		fmt.Fprint(w, err.Error())
 		return
 	}
-
-	// TODO: Create a cookie session for the user
-
 	// success log
-	fmt.Fprint(w, "successfully inserted the user")
+	fmt.Println("successfully inserted the user")
+
+	// save the cookie in the client browser
+	user.SetCookie(w, sessionID)
 
 	// Redirect to account home page
 	http.Redirect(w, r, "/", http.StatusSeeOther)
