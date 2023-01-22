@@ -15,6 +15,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
+	fmt.Println("'/' is accessed")
 	// obtain cookie
 	cookie, err := r.Cookie("sessionID")
 	if err != nil {
@@ -28,14 +29,16 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 
 	// check if the sessionID exists, if so,
 	theUser, result := doesSessionIDExist(sessionID)
-
+	fmt.Println(result)
 	// for those who did signup
 	if result {
-		fmt.Fprintf(w, "Username: "+theUser.Username+
+		fmt.Fprintln(w, "Username: "+theUser.Username+
 			", password: "+theUser.Password+
 			", sessionID: "+theUser.SessionID)
+		return
 	} else {
 		ShowPublicHome(w)
+		return
 	}
 }
 
@@ -50,10 +53,10 @@ func ShowPublicHome(w http.ResponseWriter) {
 	tmpl.Execute(w, nil)
 }
 
-// isSessionIDValid checks if the sessionID exists. It return user.User and true if the user with the sessionID exists
+// isSessionIDValid checks if the sessionID exists. It returns user.User and true if the user with the sessionID exists
 func doesSessionIDExist(sid string) (user.User, bool) {
 	// Hash the sid
-	hashed := user.Hash(sid)
+	// hashed := user.Hash(sid)
 	// get access keys
 	database, userCollection, err := user.GetDatabaseAccessKeys()
 	if err != nil {
@@ -73,7 +76,7 @@ func doesSessionIDExist(sid string) (user.User, bool) {
 	// bson.M creates a map, bson.A creates an array
 	var result bson.M
 	// Define the filter to find a specific document
-	filter := bson.M{"session_id": hashed}
+	filter := bson.M{"sessionid": sid}
 	// check if the sessionID exists in the database
 	err = collection.FindOne(context.TODO(), filter).Decode(&result)
 	// when the user with the sessionID not found
@@ -86,6 +89,6 @@ func doesSessionIDExist(sid string) (user.User, bool) {
 	return user.User{
 		Username:  result["username"].(string),
 		Password:  result["password"].(string),
-		SessionID: result["session_id"].(string),
+		SessionID: result["sessionid"].(string),
 	}, true
 }

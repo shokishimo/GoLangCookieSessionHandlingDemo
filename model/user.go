@@ -16,7 +16,7 @@ import (
 type User struct {
 	Username  string `json:"username"`
 	Password  string `json:"password"`
-	SessionID string `json:"session_id"`
+	SessionID string `json:"sessionid"`
 }
 
 func SaveUser(user User) error {
