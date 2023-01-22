@@ -1,6 +1,7 @@
 package rooter
 
 import (
+	user "github.com/shokishimo/OneTap/model"
 	"html/template"
 	"net/http"
 )
@@ -30,5 +31,17 @@ func loginGet(w http.ResponseWriter) {
 
 // loginPost handles login
 func loginPost(w http.ResponseWriter, r *http.Request) {
+	username := r.FormValue("username")
+	password := user.Hash(r.FormValue("password"))
 
+	// TODO: validate the user input
+
+	// check if the input user already exists in the database
+
+	sessionID := user.GenerateSessionID()
+	// save the cookie in the client browser
+	user.SetCookie(w, sessionID)
+
+	// Redirect to account home page
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
