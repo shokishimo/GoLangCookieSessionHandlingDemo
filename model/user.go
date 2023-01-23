@@ -80,7 +80,8 @@ func SetCookie(w http.ResponseWriter, sid string) {
 		Value:    sid,
 		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
 		HttpOnly: true,
-		Secure:   false,                // TODO: change this to true when deploying
+		//Secure:   false,
+		Secure:   true,                 // TODO: change this to true when deploying
 		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
 	}
 	http.SetCookie(w, &cookie)
