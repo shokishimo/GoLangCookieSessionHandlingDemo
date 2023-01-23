@@ -32,9 +32,12 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	// for those who did signup
 	if result {
 		// TODO: create the accountHome
-		fmt.Fprintln(w, "Username: "+theUser.Username+
-			", password: "+theUser.Password+
-			", sessionID: "+theUser.SessionID)
+		//fmt.Fprintln(w, "Username: "+theUser.Username+
+		//	", password: "+theUser.Password+
+		//	", sessionID: "+theUser.SessionID)
+		fmt.Println(theUser)
+		// Redirect to account home page
+		http.Redirect(w, r, "/accountHome", http.StatusSeeOther)
 		return
 	} else {
 		ShowPublicHome(w)
