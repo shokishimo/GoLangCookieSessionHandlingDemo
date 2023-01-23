@@ -10,6 +10,9 @@
     <div class="top">
         <p class="top-header">Login to One Tap</p>
     </div>
+    {{if .DidFail}}
+        <p style="color: red; text-align: center; font-size: 16px">{{ .Fail }}</p>
+    {{end}}
     <div id="login-container">
         <form action="/login" method="post">
             <label for="username">Username:</label>
