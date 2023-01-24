@@ -14,7 +14,7 @@ header {
     align-items: center;
     background-color: #138d75;
     color: #fff;
-    padding: 0.5rem;
+    padding: 1rem;
 }
 
 header .logo {
@@ -31,22 +31,30 @@ header .logo button {
 }
 
 header nav {
-    margin-left: 1rem;
+    margin: 0px;
 }
 
 header nav ul {
     display: flex;
+    margin: 0px;
+    padding: 0px;
 }
 
 header nav ul li {
     list-style: none;
-    margin-right: 1rem;
+    margin: 0px;
+    padding: 0px;
+}
+
+header nav ul li form {
+    list-style: none;
+    margin: auto;
+    padding: 0px;
 }
 
 header nav ul li button {
     color: #fff;
     border: none;
-    padding: 0.5rem 1rem;
     text-transform: uppercase;
     background-color: #138d75;
     font-size: 16px;
@@ -110,7 +118,7 @@ main .createNewDiv .createNewForm .createNewBtn{
     text-transform: uppercase;
     border: none;
     font-size: 1rem;
-   cursor: pointer;
+    cursor: pointer;
 }
 
 footer {
