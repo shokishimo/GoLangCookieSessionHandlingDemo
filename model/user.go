@@ -6,8 +6,10 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/shokishimo/OneTap/db"
+	"go.mongodb.org/mongo-driver/bson"
 	"net/http"
 	"os"
 	"time"
@@ -19,6 +21,7 @@ type User struct {
 	SessionID string `json:"sessionid"`
 }
 
+// SaveUser saves user data into a database
 func SaveUser(user User) error {
 	// get access keys
 	database, userCollection, err := GetDatabaseAccessKeys()
@@ -85,4 +88,61 @@ func SetCookie(w http.ResponseWriter, sid string) {
 		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
 	}
 	http.SetCookie(w, &cookie)
+}
+
+// DeleteCookie deletes cookie from both the database and browser
+func DeleteCookie(w http.ResponseWriter, sid string) error {
+	err := DeleteCookieFromDatabase(sid)
+	if err != nil {
+		return err
+	}
+
+	// delete cookie from browser
+	cookie := &http.Cookie{
+		Name:     "sessionID",
+		Value:    "",
+		Expires:  time.Now(),
+		MaxAge:   -1,
+		HttpOnly: true,
+	}
+	http.SetCookie(w, cookie)
+
+	return nil
+}
+
+func DeleteCookieFromDatabase(sid string) error {
+	// Hash the sid
+	hashed := Hash(sid)
+	// get access keys
+	database, userCollection, err := GetDatabaseAccessKeys()
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+	// database connection
+	client, err := db.Connect()
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+	defer db.Disconnect(client)
+	collection := client.Database(database).Collection(userCollection)
+
+	filter := bson.M{"sessionid": hashed}
+	update := bson.M{"$set": bson.M{"sessionid": ""}}
+	result, err := collection.UpdateOne(context.TODO(), filter, update)
+
+	// when an error happened in the transaction
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+	// when the user with the username and password not found
+	if result.MatchedCount == 0 {
+		fmt.Println("user not found")
+		return errors.New("user not found")
+	}
+
+	fmt.Println("Delete cookie from database")
+	return nil
 }

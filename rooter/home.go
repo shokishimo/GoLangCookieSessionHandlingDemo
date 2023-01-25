@@ -56,7 +56,7 @@ func ShowPublicHome(w http.ResponseWriter) {
 	tmpl.Execute(w, nil)
 }
 
-// isSessionIDValid checks if the sessionID exists. It returns user.User and true if the user with the sessionID exists
+// doesSessionIDExist checks if the sessionID exists. It returns user.User and true if the user with the sessionID exists
 func doesSessionIDExist(sid string) (user.User, bool) {
 	// Hash the sid
 	hashed := user.Hash(sid)
