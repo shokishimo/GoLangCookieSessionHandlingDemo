@@ -13,6 +13,7 @@ func ServeMux() http.Handler {
 	mux.HandleFunc("/login", rooter.LoginHandler)
 	mux.HandleFunc("/accountHome", rooter.AccountHomeHandler)
 	mux.HandleFunc("/logout", rooter.LogoutHandler)
+	mux.HandleFunc("/account", rooter.AccountHandler)
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	return mux

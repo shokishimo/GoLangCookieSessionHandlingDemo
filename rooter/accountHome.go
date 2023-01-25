@@ -23,7 +23,7 @@ func AccountHomeHandler(w http.ResponseWriter, r *http.Request) {
 	sessionID := cookie.Value
 
 	// check if the sessionID exists, if so,
-	_, result := doesSessionIDExist(sessionID)
+	_, result := getUserBySessionID(sessionID)
 	// for those who did signup
 	if result {
 		// for those who don't sign up yet

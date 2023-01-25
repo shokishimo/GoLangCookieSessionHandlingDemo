@@ -28,7 +28,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 	sessionID := cookie.Value
 
 	// check if the sessionID exists, if so,
-	theUser, result := doesSessionIDExist(sessionID)
+	theUser, result := getUserBySessionID(sessionID)
 	// for those who did signup
 	if result {
 		// TODO: create the accountHome
@@ -57,7 +57,7 @@ func ShowPublicHome(w http.ResponseWriter) {
 }
 
 // doesSessionIDExist checks if the sessionID exists. It returns user.User and true if the user with the sessionID exists
-func doesSessionIDExist(sid string) (user.User, bool) {
+func getUserBySessionID(sid string) (user.User, bool) {
 	// Hash the sid
 	hashed := user.Hash(sid)
 	// get access keys

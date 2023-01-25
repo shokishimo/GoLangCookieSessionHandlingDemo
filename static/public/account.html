@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>One Tap</title>
+    <link rel="stylesheet" href="/static/css/home.css">
+</head>
+<body>
+<div style="margin:auto;" id="my-container">
+    <header>
+        <div class="logo">
+            <form action="/" method="get">
+                <input type="hidden" />
+                <button type="submit">One Tap</button>
+            </form>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <form action="/logout" method="get">
+                        <input type="hidden" />
+                        <button type="submit">Log out</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <p>Account Settings</p>
+        <p>Username: {{.Username}}</p>
+    </main>
+    <footer>
+        <p>Copyright 2023 One Tap. All rights reserved.</p>
+    </footer>
+</div>
+<script src="/static/js/account.js"></script>
+</body>
+</html>
