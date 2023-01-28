@@ -2,6 +2,7 @@ package rooter
 
 import (
 	"fmt"
+	user "github.com/shokishimo/OneTap/model"
 	"html/template"
 	"net/http"
 )
@@ -15,7 +16,7 @@ func AccountHandler(w http.ResponseWriter, r *http.Request) {
 	cookie, _ := r.Cookie("sessionID")
 	sessionID := cookie.Value
 	// get user data with sessionID
-	theUser, result := getUserBySessionID(sessionID)
+	theUser, result := user.GetUserBySessionID(sessionID)
 	if !result {
 		fmt.Fprint(w, "Unable to get user data")
 		return

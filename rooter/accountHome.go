@@ -2,6 +2,7 @@ package rooter
 
 import (
 	"fmt"
+	user "github.com/shokishimo/OneTap/model"
 	"html/template"
 	"net/http"
 )
@@ -23,7 +24,7 @@ func AccountHomeHandler(w http.ResponseWriter, r *http.Request) {
 	sessionID := cookie.Value
 
 	// check if the sessionID exists, if so,
-	_, result := getUserBySessionID(sessionID)
+	_, result := user.GetUserBySessionID(sessionID)
 	// for those who did signup
 	if result {
 		// for those who don't sign up yet

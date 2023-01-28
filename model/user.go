@@ -146,3 +146,43 @@ func DeleteCookieFromDatabase(sid string) error {
 	fmt.Println("Delete cookie from database")
 	return nil
 }
+
+// GetUserBySessionID checks if the sessionID exists. It returns user.User and true if the user with the sessionID exists, return false otherwise.
+func GetUserBySessionID(sid string) (User, bool) {
+	// Hash the sid
+	hashed := Hash(sid)
+	// get access keys
+	database, userCollection, err := GetDatabaseAccessKeys()
+	if err != nil {
+		fmt.Println(err.Error())
+		return User{}, false
+	}
+	// database connection
+	client, err := db.Connect()
+	if err != nil {
+		fmt.Println(err.Error())
+		return User{}, false
+	}
+	defer db.Disconnect(client)
+	collection := client.Database(database).Collection(userCollection)
+
+	// bson.D creates a set of key and value to filter the database
+	// bson.M creates a map, bson.A creates an array
+	var result bson.M
+	// Define the filter to find a specific document
+	filter := bson.M{"sessionid": hashed}
+	// check if the sessionID exists in the database
+	err = collection.FindOne(context.TODO(), filter).Decode(&result)
+	// when the user with the sessionID not found
+	if err != nil {
+		fmt.Println(err.Error())
+		return User{}, false
+	}
+	// when the user is found
+	fmt.Println("user found")
+	return User{
+		Username:  result["username"].(string),
+		Password:  result["password"].(string),
+		SessionID: result["sessionid"].(string),
+	}, true
+}
