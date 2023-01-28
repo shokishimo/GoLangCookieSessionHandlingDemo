@@ -1,10 +1,11 @@
 package model
 
 type Model struct {
-	Username string `json:"username""`
-	Os       string `json:"os"`
-	Browser  string `json:"browser"`
-	Url      string `json:"url"`
+	Username    string `json:"username"`
+	ProjectName string `json:"projectname"`
+	Os          string `json:"os"`
+	Browser     string `json:"browser"`
+	Url         string `json:"url"`
 }
 
 const (
