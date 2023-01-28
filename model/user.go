@@ -19,6 +19,7 @@ type User struct {
 	Username  string `json:"username"`
 	Password  string `json:"password"`
 	SessionID string `json:"sessionid"`
+	Apps      []App  `json:"apps"`
 }
 
 // SaveUser saves user data into a database

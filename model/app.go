@@ -1,6 +1,6 @@
 package model
 
-type Model struct {
+type App struct {
 	Username    string `json:"username"`
 	ProjectName string `json:"projectname"`
 	Os          string `json:"os"`
