@@ -14,6 +14,7 @@ func ServeMux() http.Handler {
 	mux.HandleFunc("/accountHome", rooter.AccountHomeHandler)
 	mux.HandleFunc("/logout", rooter.LogoutHandler)
 	mux.HandleFunc("/account", rooter.AccountHandler)
+	mux.HandleFunc("/createNewProject", rooter.CreateNewProjectHandler)
 
 	mux.HandleFunc("/demoStart", rooter.DemoStartHandler)
 

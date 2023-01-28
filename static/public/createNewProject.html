@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>One Tap</title>
-    <link rel="stylesheet" href="/static/css/accountHome.css">
+    <link rel="stylesheet" href="/static/css/CreateNewProject.css">
 </head>
 <body>
 <div style="margin:auto;" id="my-container">
     <header>
         <div class="logo">
-            <form action="/accountHome" method="get">
+            <form action="/" method="get">
                 <input type="hidden" />
                 <button type="submit">One Tap</button>
             </form>
@@ -18,22 +18,16 @@
         <nav>
             <ul>
                 <li>
-                    <form action="/account" method="get">
+                    <form action="/accountHome.html" method="get">
                         <input type="hidden" />
-                        <button type="submit">account</button>
-                    </form>
-                </li>
-                <li>
-                    <form action="/logout" method="get">
-                        <input type="hidden" />
-                        <button type="submit">Log out</button>
+                        <button type="submit">Home</button>
                     </form>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <p>Welcome to One Tap</p>
+        <p class="main-head">New Project apps to add</p>
         <div class="createNewDiv">
             <form class="createNewForm" action="/createNewProject" method="get">
                 <input type="hidden" />
@@ -45,6 +39,6 @@
         <p>Copyright 2023 One Tap. All rights reserved.</p>
     </footer>
 </div>
-    <script src="/static/js/home.js"></script>
+<script src="/static/js/CreateNewProject.js"></script>
 </body>
 </html>
