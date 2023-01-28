@@ -63,7 +63,7 @@ func loginPost(w http.ResponseWriter, r *http.Request) error {
 	// TODO: validate the user input
 
 	// get access keys
-	database, userCollection, err := user.GetDatabaseAccessKeys()
+	database, userCollection, err := user.GetDatabaseAccessKeysForUsers()
 	if err != nil {
 		return err
 	}

@@ -24,7 +24,7 @@ type User struct {
 // SaveUser saves user data into a database
 func SaveUser(user User) error {
 	// get access keys
-	database, userCollection, err := GetDatabaseAccessKeys()
+	database, userCollection, err := GetDatabaseAccessKeysForUsers()
 	if err != nil {
 		return err
 	}
@@ -46,8 +46,8 @@ func SaveUser(user User) error {
 	return nil
 }
 
-// GetDatabaseAccessKeys gets keys to access database from .env file
-func GetDatabaseAccessKeys() (database string, userCollection string, err error) {
+// GetDatabaseAccessKeysForUsers gets keys to access database from .env file
+func GetDatabaseAccessKeysForUsers() (database string, userCollection string, err error) {
 	if err := godotenv.Load(); err != nil {
 		return "", "", err
 	}
@@ -114,7 +114,7 @@ func DeleteCookieFromDatabase(sid string) error {
 	// Hash the sid
 	hashed := Hash(sid)
 	// get access keys
-	database, userCollection, err := GetDatabaseAccessKeys()
+	database, userCollection, err := GetDatabaseAccessKeysForUsers()
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
@@ -152,7 +152,7 @@ func GetUserBySessionID(sid string) (User, bool) {
 	// Hash the sid
 	hashed := Hash(sid)
 	// get access keys
-	database, userCollection, err := GetDatabaseAccessKeys()
+	database, userCollection, err := GetDatabaseAccessKeysForUsers()
 	if err != nil {
 		fmt.Println(err.Error())
 		return User{}, false

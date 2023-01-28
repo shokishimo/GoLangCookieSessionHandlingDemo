@@ -1,6 +1,7 @@
 package rooter
 
 import (
+	app "github.com/shokishimo/OneTap/model"
 	"net/http"
 	"os/exec"
 )
@@ -11,12 +12,12 @@ func DemoStartHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cmd := exec.Command("open", "-a", "/Applications/Postman.app")
+	cmd := exec.Command(app.MacOS_Command1, app.MacOS_Command2, "/Applications/Postman.app")
 	err := cmd.Start()
 	if err != nil {
 		// handle error
 	}
-	cmd = exec.Command("open", "-a", "Google Chrome", "https://github.com")
+	cmd = exec.Command(app.MacOS_Command1, app.MacOS_Command2, "Google Chrome", "https://github.com")
 	err = cmd.Start()
 	if err != nil {
 		// handle error
