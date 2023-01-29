@@ -9,8 +9,8 @@ type App struct {
 }
 
 const (
-	MacOS_Command1 string = "open"
-	MacOS_Command2 string = "-a"
+	MacosCommand1 string = "open"
+	MacosCommand2 string = "-a"
 
-	Windows_Command string = "start"
+	WindowsCommand string = "start"
 )
