@@ -1,25 +1,13 @@
+let count = 2;
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("add-another").addEventListener("click", function(){
         // Create the form fields
-        const usernameLabel = document.createElement("label");
-        usernameLabel.setAttribute("for", "username");
-        usernameLabel.innerHTML = "Username:";
-        const usernameInput = document.createElement("input");
-        usernameInput.setAttribute("type", "text");
-        usernameInput.setAttribute("id", "username");
-        usernameInput.setAttribute("name", "username");
-
-        const projectnameLabel = document.createElement("label");
-        projectnameLabel.setAttribute("for", "projectname");
-        projectnameLabel.innerHTML = "Project Name:";
-        const projectnameInput = document.createElement("input");
-        projectnameInput.setAttribute("type", "text");
-        projectnameInput.setAttribute("id", "projectname");
-        projectnameInput.setAttribute("name", "projectname");
+        const p = document.createElement("p")
+        p.innerHTML = "App" + count++;
 
         const osLabel = document.createElement("label");
         osLabel.setAttribute("for", "os");
-        osLabel.innerHTML = "Operating System:";
+        osLabel.innerHTML = "Operating System: ";
         const osSelect = document.createElement("select");
         osSelect.setAttribute("id", "os");
         osSelect.setAttribute("name", "os");
@@ -36,49 +24,38 @@ document.addEventListener("DOMContentLoaded", function(){
 
         const browserLabel = document.createElement("label");
         browserLabel.setAttribute("for", "browser");
-        browserLabel.innerHTML = "Browser:";
+        browserLabel.innerHTML = "Browser Name (if it's a web app): ";
         const browserInput = document.createElement("input");
         browserInput.setAttribute("type", "text");
         browserInput.setAttribute("id", "browser");
         browserInput.setAttribute("name", "browser");
+        browserInput.setAttribute("size", "25");
+        browserInput.setAttribute("placeholder", "otherwise, keep this blank")
 
         const urlLabel = document.createElement("label");
         urlLabel.setAttribute("for", "url");
-        urlLabel.innerHTML = "URL:";
+        urlLabel.innerHTML = "URL: ";
         const urlInput = document.createElement("input");
         urlInput.setAttribute("type", "text");
         urlInput.setAttribute("id", "url");
         urlInput.setAttribute("name", "url");
-
-        // Add line break elements
-        const br1 = document.createElement("br");
-        const br2 = document.createElement("br");
-        const br3 = document.createElement("br");
-        const br4 = document.createElement("br");
-        const br5 = document.createElement("br");
+        urlInput.setAttribute("placeholder", "or path to the app")
 
         // Append the form fields to the form
-        const form = document.getElementById("createNewForm");
-        form.appendChild(usernameLabel);
-        form.appendChild(usernameInput);
-        form.appendChild(br1);
-        form.appendChild(br2);
-        form.appendChild(projectnameLabel);
-        form.appendChild(projectnameInput);
-        form.appendChild(br3);
-        form.appendChild(br4);
+        const form = document.getElementById("addDiv");
+        form.appendChild(p)
         form.appendChild(osLabel);
         form.appendChild(osSelect);
-        form.appendChild(br5);
-        form.appendChild(br5);
+        form.appendChild(document.createElement("br"));
+        form.appendChild(document.createElement("br"));
         form.appendChild(browserLabel);
         form.appendChild(browserInput);
-        form.appendChild(br5);
-        form.appendChild(br5);
+        form.appendChild(document.createElement("br"));
+        form.appendChild(document.createElement("br"));
         form.appendChild(urlLabel);
         form.appendChild(urlInput);
-        form.appendChild(br5);
-        form.appendChild(br5);
+        form.appendChild(document.createElement("br"));
+        form.appendChild(document.createElement("br"));
     });
 
 });

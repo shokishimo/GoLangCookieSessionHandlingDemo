@@ -75,6 +75,10 @@ main .createNewDiv #createNewForm {
     margin-top: 2rem;
 }
 
+main .createNewDiv #createNewForm p {
+    color: #138d75;
+}
+
 label {
     font-weight: normal;
 }
@@ -94,6 +98,13 @@ select {
 
 option {
     padding: 3px;
+}
+
+main .createNewDiv #createNewForm #add-another {
+    color: white;
+    background-color: slategrey;
+    padding: 5px 3px;
+    border-radius: 10px;
 }
 
 input[type="submit"] {
