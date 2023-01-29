@@ -67,7 +67,7 @@ main .createNewDiv {
     text-align: center;
 }
 
-main .createNewDiv .createNewForm {
+main .createNewDiv #createNewForm {
     background-color: #fff;
     padding: 2rem;
     border-radius: 10px;
@@ -83,6 +83,17 @@ input[type="text"] {
     border-radius: 0.5rem;
     border-width: 1px;
     padding: 3px 5px;
+}
+
+select {
+    font-size: 13px;
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+option {
+    padding: 3px;
 }
 
 input[type="submit"] {

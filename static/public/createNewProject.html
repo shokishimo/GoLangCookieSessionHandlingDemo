@@ -29,7 +29,7 @@
     <main>
         <p class="main-head" style="text-align: center">New Project apps to add</p>
         <div class="createNewDiv">
-            <form class="createNewForm" action="/createNewProject" method="post">
+            <form id="createNewForm" action="/createNewProject" method="post">
                 <label for="projectname">Project Name:</label>
                 <input type="text" id="projectname" name="projectname"><br><br>
                 <p>App to open</p>
@@ -42,8 +42,7 @@
                 <input type="text" id="browser" name="browser" size="25" placeholder="otherwise, keep this blank"><br><br>
                 <label for="url">URL:</label>
                 <input type="text" id="url" name="url" placeholder="or path to the app"><br><br>
-
-
+                <button type="button" id="add-another">Add another app</button><br><br>
                 <input type="submit" value="Submit">
             </form>
         </div>
@@ -52,6 +51,6 @@
         <p>Copyright 2023 One Tap. All rights reserved.</p>
     </footer>
 </div>
-<script src="/static/js/CreateNewProject.js"></script>
+<script src="/static/js/createNewProject.js"></script>
 </body>
 </html>
