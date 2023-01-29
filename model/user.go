@@ -7,12 +7,13 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	"github.com/joho/godotenv"
-	"github.com/shokishimo/OneTap/db"
-	"go.mongodb.org/mongo-driver/bson"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/joho/godotenv"
+	"github.com/shokishimo/OneTap/db"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 type User struct {
@@ -84,8 +85,8 @@ func SetCookie(w http.ResponseWriter, sid string) {
 		Value:    sid,
 		Expires:  time.Now().Add(3600 * 24 * 3 * time.Second), // 3 days
 		HttpOnly: true,
-		Secure:   false, // When developing
-		// Secure:   true,                 // When deploying
+		// Secure:   false, // When developing
+		Secure:   true,                 // When deploying
 		SameSite: http.SameSiteLaxMode, // TODO: change this to Strict (maybe)
 	}
 	http.SetCookie(w, &cookie)
