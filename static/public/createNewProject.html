@@ -27,22 +27,22 @@
         </nav>
     </header>
     <main>
-        <p class="main-head" style="text-align: center">New Project apps to add</p>
+        <p class="main-head" style="text-align: center">New Project apps to open</p>
         <div class="createNewDiv">
             <form id="createNewForm" action="/createNewProject" method="post">
                 <label for="projectname">Project Name: </label>
                 <input type="text" id="projectname" name="projectname"><br><br>
-                <p class="app head">App1</p>
+                <p class="app head">App</p>
                 <label for="os">Operating System: </label>
                 <select id="os" name="os">
-                    <option value="Windows">Windows</option>
-                    <option value="Mac">Mac</option>
+                    <option value="Windows">Mac</option>
+                    <option value="Mac">Windows</option>
                 </select><br><br>
                 <label for="browser">Browser Name (if it's a web app): </label>
                 <input type="text" id="browser" name="browser" size="25" placeholder="otherwise, keep this blank"><br><br>
                 <label for="url">URL: </label>
-                <input type="text" id="url" name="url" placeholder="or path to the app"><br><br>
-                <div id="addDiv">
+                <input type="text" id="url" name="url" placeholder="or path to the app"><br><br><hr>
+                <div id="addContainer">
                 </div>
                 <button type="button" id="add-another">Add another app</button><br><br>
                 <input type="submit" value="Submit">
