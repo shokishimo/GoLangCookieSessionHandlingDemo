@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: auto;
+    width: 100%;
+}
+
+#my-container {
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #138d75;
+    color: #fff;
+    padding: 0.5rem;
+}
+
+header .logo {
+    flex: 1;
+}
+
+header .logo button {
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+header nav {
+    margin-left: 1rem;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li {
+    list-style: none;
+    margin-right: 1rem;
+}
+
+header nav ul li button {
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    background-color: #138d75;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+main {
+    padding: 2rem;
+}
+
+main .main-head {
+    font-size: 20px;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+main .createNewDiv {
+    text-align: center;
+}
+
+main .createNewDiv .createNewForm {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+    margin-top: 2rem;
+}
+
+label {
+    font-weight: normal;
+}
+
+input[type="text"] {
+    border-radius: 0.5rem;
+    border-width: 1px;
+    padding: 3px 5px;
+}
+
+input[type="submit"] {
+    background-color: blue;
+    color: white;
+    border: 2px solid blue;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px #888888;
+    border-radius: 25px;
+    padding: 10px 5px;
+}
+
+footer {
+    background-color: #3e3e3e;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
