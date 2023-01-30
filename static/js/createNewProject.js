@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", function(){
         appElement.innerHTML += `
                 <p class="app head">App</p>
                 <label for="os">Operating System: </label>
-                <select id="os" name="os">
+                <select id="os" name="os" required>
                     <option value="Windows">Mac</option>
                     <option value="Mac">Windows</option>
                 </select><br><br>
                 <label for="browser">Browser Name (if it's a web app): </label>
-                <input type="text" id="browser" name="browser" size="25" placeholder="otherwise, keep this blank"><br><br>
+                <input type="text" id="browser" name="browser" size="25" placeholder="otherwise, keep this blank" required><br><br>
                 <label for="url">URL: </label>
-                <input type="text" id="url" name="url" placeholder="or path to the app"><br><br>
+                <input type="text" id="url" name="url" placeholder="or path to the app" required><br><br>
                 <button class="delete-app-button">Delete</button><br><br><hr>
         `
         // add the new app element to the app container

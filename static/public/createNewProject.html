@@ -31,17 +31,17 @@
         <div class="createNewDiv">
             <form id="createNewForm" action="/createNewProject" method="post">
                 <label for="projectname">Project Name: </label>
-                <input type="text" id="projectname" name="projectname"><br><br>
+                <input type="text" id="projectname" name="projectname" required><br><br>
                 <p class="app head">App</p>
                 <label for="os">Operating System: </label>
-                <select id="os" name="os">
+                <select id="os" name="os" required>
                     <option value="Windows">Mac</option>
                     <option value="Mac">Windows</option>
                 </select><br><br>
                 <label for="browser">Browser Name (if it's a web app): </label>
-                <input type="text" id="browser" name="browser" size="25" placeholder="otherwise, keep this blank"><br><br>
+                <input type="text" id="browser" name="browser" size="25" placeholder="otherwise, keep this blank" required><br><br>
                 <label for="url">URL: </label>
-                <input type="text" id="url" name="url" placeholder="or path to the app"><br><br><hr>
+                <input type="text" id="url" name="url" placeholder="or path to the app" required><br><br><hr>
                 <div id="addContainer">
                 </div>
                 <button type="button" id="add-another">Add another app</button><br><br>
