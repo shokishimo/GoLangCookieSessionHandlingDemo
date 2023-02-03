@@ -1,2 +1,1 @@
-## One Tap
-One Tap is a golang web application.
+## GoLang web app demo: cookie session handling
